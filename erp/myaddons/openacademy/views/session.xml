@@ -1,0 +1,55 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="session_list_view">
+            <field name="name">session.list</field>
+            <field name="model">openacademy.session</field>
+            <field name="arch" type="xml">
+                <tree string="学期列表">
+                    <field name="name"/>
+                    <field name="start_date"/>
+                    <field name="duration"/>
+                    <field name="seats"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="session_form_view">
+            <field name="name">session.form</field>
+            <field name="model">openacademy.session</field>
+            <field name="arch" type='xml'>
+                <form string="学期视图">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="start_date"/>
+                            <field name="duration"/>
+                            <field name="seats"/>
+                        </group>
+                        <!--<notebook>-->
+                            <!--<page string="课程描述">-->
+                                <!--<field name="description"/>-->
+                            <!--</page>-->
+                            <!--<page string="About">-->
+                                <!--This is an example of notebooks-->
+                            <!--</page>-->
+                        <!--</notebook>-->
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="session_list_action">
+            <field name="name">学期列表</field>
+            <field name="res_model">openacademy.session</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_smiling_face">创建你的第一个学期吧！</p>
+            </field>
+        </record>
+
+        <menuitem id="session_menu" name="学期" parent="openacademy_menu" action="session_list_action"/>
+
+    </data>
+</odoo>

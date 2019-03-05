@@ -26,7 +26,8 @@
         'security/security.xml',
         'security/ir.model.access.csv',  # 因为权限配置会使用到新配的分组，所以先加载security.xml文件
         'views/views.xml',
-        'views/openacademy.xml',
+        'views/course.xml',
+        'views/session.xml'
     ],
     # only loaded in demonstration mode
     'demo': [
