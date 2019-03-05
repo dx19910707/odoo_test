@@ -1,0 +1,52 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="course_list_view">
+            <field name="name">course.list</field>
+            <field name="model">openacademy.course</field>
+            <field name="arch" type="xml">
+                <tree string="课程列表">
+                    <field name="name"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="course_form_view">
+            <field name="name">course.form</field>
+            <field name="model">openacademy.course</field>
+            <field name="arch" type='xml'>
+                <form string="课程视图">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <notebook>
+                            <page string="课程描述">
+                                <field name="description"/>
+                            </page>
+                            <page string="About">
+                                This is an example of notebooks
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="course_list_action">
+            <field name="name">课程列表</field>
+            <field name="res_model">openacademy.course</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_smiling_face">创建你的第一个课程吧！</p>
+            </field>
+        </record>
+
+        <menuitem id="main_openacademy_menu" name="乐至中学"/>
+        <menuitem id="openacademy_menu" name="乐至中学" parent="main_openacademy_menu"/>
+        <menuitem id="courses_menu" name="课程" parent="openacademy_menu" action="course_list_action"/>
+
+    </data>
+</odoo>

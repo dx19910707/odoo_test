@@ -1,0 +1,9 @@
+<odoo>
+    <record id="course_manager" model="res.groups">
+        <field name="name">乐中校 / 校长</field>
+    </record>
+
+    <record id="course_read" model="res.groups">
+        <field name="name">乐中校 / 学生</field>
+    </record>
+</odoo>
