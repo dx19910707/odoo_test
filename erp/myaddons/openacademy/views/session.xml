@@ -5,11 +5,9 @@
             <field name="name">session.list</field>
             <field name="model">openacademy.session</field>
             <field name="arch" type="xml">
-                <tree string="学期列表">
+                <tree string="session列表">
                     <field name="name"/>
-                    <field name="start_date"/>
-                    <field name="duration"/>
-                    <field name="seats"/>
+                    <field name="course_id"/>
                 </tree>
             </field>
         </record>
@@ -18,38 +16,41 @@
             <field name="name">session.form</field>
             <field name="model">openacademy.session</field>
             <field name="arch" type='xml'>
-                <form string="学期视图">
+                <form string="session视图">
                     <sheet>
-                        <group>
+                        <group string="General">
+                            <field name="course_id" options="{'no_open':True,'no_create':True}"/>
                             <field name="name"/>
+                            <field name="instructor_id" options="{'no_open':True,'no_create':True}"/>
+                        </group>
+                        <group string="Schedule">
                             <field name="start_date"/>
                             <field name="duration"/>
                             <field name="seats"/>
                         </group>
-                        <!--<notebook>-->
-                            <!--<page string="课程描述">-->
-                                <!--<field name="description"/>-->
-                            <!--</page>-->
-                            <!--<page string="About">-->
-                                <!--This is an example of notebooks-->
-                            <!--</page>-->
-                        <!--</notebook>-->
+                        <label for="attendee_ids"/>
+                        <field name="attendee_ids">
+                            <tree string="attendee_ids" editable="bottom">
+                                <field name="display_name" string="名字"/>
+                                <field name="email" string="邮箱"/>
+                            </tree>
+                        </field>
                     </sheet>
                 </form>
             </field>
         </record>
 
         <record model="ir.actions.act_window" id="session_list_action">
-            <field name="name">学期列表</field>
+            <field name="name">session列表</field>
             <field name="res_model">openacademy.session</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="help" type="html">
-                <p class="oe_view_nocontent_smiling_face">创建你的第一个学期吧！</p>
+                <p class="oe_view_nocontent_smiling_face">创建你的第一个session吧！</p>
             </field>
         </record>
 
-        <menuitem id="session_menu" name="学期" parent="openacademy_menu" action="session_list_action"/>
+        <menuitem id="session_menu" name="session" parent="openacademy_menu" action="session_list_action"/>
 
     </data>
 </odoo>

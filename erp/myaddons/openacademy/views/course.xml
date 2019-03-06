@@ -7,7 +7,7 @@
             <field name="arch" type="xml">
                 <tree string="课程列表">
                     <field name="name"/>
-                    <field name="description"/>
+                    <field name="responsible_id"/>
                 </tree>
             </field>
         </record>
@@ -20,10 +20,19 @@
                     <sheet>
                         <group>
                             <field name="name"/>
+                            <field name="responsible_id" options="{'no_open':True,'no_create':True}"/>
                         </group>
                         <notebook>
                             <page string="课程描述">
                                 <field name="description"/>
+                            </page>
+                            <page string="Sessions">
+                                <field name="session_ids" context="{'no_open':True}">
+                                    <tree string="Registered sessions" editable="bottom">
+                                        <field name="name"/>
+                                        <field name="instructor_id"/>
+                                    </tree>
+                                </field>
                             </page>
                             <page string="About">
                                 This is an example of notebooks

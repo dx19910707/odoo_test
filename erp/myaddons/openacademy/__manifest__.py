@@ -23,6 +23,7 @@
 
     # always loaded
     'data': [
+        'views/odoo_test.xml',
         'security/security.xml',
         'security/ir.model.access.csv',  # 因为权限配置会使用到新配的分组，所以先加载security.xml文件
         'views/views.xml',
