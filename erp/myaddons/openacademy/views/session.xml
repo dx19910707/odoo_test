@@ -8,6 +8,7 @@
                 <tree string="session列表">
                     <field name="name"/>
                     <field name="course_id"/>
+                    <field name="taken_seats" widget="progressbar"/>
                 </tree>
             </field>
         </record>
@@ -22,15 +23,17 @@
                             <field name="course_id" options="{'no_open':True,'no_create':True}"/>
                             <field name="name"/>
                             <field name="instructor_id" options="{'no_open':True,'no_create':True}"/>
+                            <field name="active"/>
                         </group>
                         <group string="Schedule">
                             <field name="start_date"/>
                             <field name="duration"/>
                             <field name="seats"/>
+                            <field name="taken_seats" widget="progressbar"/>
                         </group>
                         <label for="attendee_ids"/>
-                        <field name="attendee_ids">
-                            <tree string="attendee_ids" editable="bottom">
+                        <field name="attendee_ids" context="{'no_open':True}" options="{'no_create': True, 'no_open': True}">
+                            <tree string="attendee_ids">
                                 <field name="display_name" string="名字"/>
                                 <field name="email" string="邮箱"/>
                             </tree>

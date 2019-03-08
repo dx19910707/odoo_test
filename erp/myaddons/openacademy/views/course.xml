@@ -27,7 +27,7 @@
                                 <field name="description"/>
                             </page>
                             <page string="Sessions">
-                                <field name="session_ids" context="{'no_open':True}">
+                                <field name="session_ids" context="{'no_open':True}" attrs="{'readonly': True}">
                                     <tree string="Registered sessions" editable="bottom">
                                         <field name="name"/>
                                         <field name="instructor_id"/>
