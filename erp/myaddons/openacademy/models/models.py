@@ -33,3 +33,20 @@ class Session(models.Model):
                 item.taken_seats = 0
             else:
                 item.taken_seats = 100 * len(item.attendee_ids) / item.seats
+
+    @api.onchange('seats', 'attendee_ids')
+    def _verify_vaild_seats(self):
+        if self.seats < 0:
+            return {
+                'warning':{
+                    'title': "参数错误",
+                    'message': "座位数必须是大于等于0的整数"
+                }
+            }
+        if self.seats < len(self.attendee_ids):
+            return {
+                'warning':{
+                    'title': "参数错误",
+                    'message': "座位数不能小于出席人数"
+                }
+            }
