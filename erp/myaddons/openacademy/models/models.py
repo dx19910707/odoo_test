@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api
+from odoo import models, fields, api, exceptions
 
 class Course(models.Model):
     _name = 'openacademy.course'
@@ -11,6 +11,27 @@ class Course(models.Model):
     responsible_id = fields.Many2one('res.users', ondelete='set null', string="负责人", index=True)
     session_ids = fields.One2many('openacademy.session', 'course_id', string='Sessions')
 
+    _sql_constraints = [
+        ("name_description_check",
+         "CHECK(name != description)",
+         "课程名称和课程描述不能相同"),
+        ("name_unique",
+         "UNIQUE(name)",
+         "已存在相同名称的课程")
+    ]
+
+    @api.multi
+    def copy(self, default=None):
+        default = dict(default or {})
+
+        copied_count = self.search_count(
+            [('name', '=like', u'%{} - 复制'.format(self.name))])
+        if not copied_count:
+            new_name = '{} - 复制'.format(self.name)
+        else:
+            new_name = '{} - 复制({})'.format(self.name, copied_count)
+        default['name'] = new_name
+        return super(Course, self).copy(default)
 
 class Session(models.Model):
     _name = 'openacademy.session'
@@ -50,3 +71,8 @@ class Session(models.Model):
                     'message': "座位数不能小于出席人数"
                 }
             }
+
+    @api.constrains('instructor_id', 'attendee_ids')
+    def _chech_instructor_not_in_attendees(self):
+        if self.instructor_id and self.instructor_id in self.attendee_ids:
+            raise exceptions.ValidationError('指导员不能参加这门session')
